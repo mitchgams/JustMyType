@@ -5,7 +5,7 @@ let game ={
     'itant eate anot eat nato inate eat anot tain eat', 
     'nee ene ate ite tent tiet ent ine ene ete ene ate'],
     charNum: 0,
-    wordCharList: [],
+    sentenceCharList: [],
     sentenceNum: 0,
     wordCount: 0,
     mistakes: 0,
@@ -51,12 +51,12 @@ $('document').ready(function() {
     function setupPromp() {
         let nT = new Date();
         game.initialTime = nT.getTime();
-        game.wordCharList = game.sentences[game.sentenceNum].split('');
+        game.sentenceCharList = game.sentences[game.sentenceNum].split('');
         $('#feedback').empty();
         $('#target-letter').empty();
         $('#sentence').empty();
         $('<p>'+game.sentences[game.sentenceNum]+'</p>').appendTo('#sentence');
-        $('<p>Character up: '+game.wordCharList[game.charNum]+'</p>').appendTo('#target-letter');
+        $('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>').appendTo('#target-letter');
     }
     
     setupPromp();
@@ -64,7 +64,7 @@ $('document').ready(function() {
     console.log(game);
 
     function checkClick(id) {
-        if(String.fromCharCode(id) !== game.wordCharList[game.charNum]) { // character wrong
+        if(String.fromCharCode(id) !== game.sentenceCharList[game.charNum]) { // character wrong
             $('#feedback').empty();
             $('<p>&#10060;</p>').appendTo('#feedback');
             game.mistakes++;
@@ -72,12 +72,12 @@ $('document').ready(function() {
 
             game.charNum++;
             $('#target-letter').empty();
-            $('<p>Character up: '+game.wordCharList[game.charNum]+'</p>').appendTo('#target-letter');
+            $('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>').appendTo('#target-letter');
             $('#feedback').empty();
             $('<p>&#9989;</p>').appendTo('#feedback');
             setHighLightPx(false);
             if(String.fromCharCode(id) === " ") game.wordCount++;
-            if(game.charNum === game.wordCharList.length) { // sentence complete & last word count++
+            if(game.charNum === game.sentenceCharList.length) { // sentence complete & last word count++
                 game.wordCount++;
                 let nT = new Date();
                 game.finalTime = ((nT.getTime() - game.initialTime)/1000/60);
