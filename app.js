@@ -79,12 +79,14 @@ $('document').ready(function() {
             if(String.fromCharCode(id) === " ") game.wordCount++;
             if(game.charNum === game.wordCharList.length) { // sentence complete & last word count++
                 game.wordCount++;
-                game.sentenceNum++;
                 let nT = new Date();
                 game.finalTime = ((nT.getTime() - game.initialTime)/1000/60);
                 $('#previous-wpm').empty();
                 $('<p>' + ((game.wordCount/game.finalTime)-(2*game.mistakes)).toFixed(2) + ' words per minute!</p>').appendTo('#previous-wpm');
-                if(game.sentenceNum < game.sentences.length) { // more sentences to go 
+                if(game.sentenceNum < game.sentences.length) { // more sentences to go
+                    game.mistakes = 0;  
+                    game.wordCount = 0;
+                    game.sentenceNum++;
                     game.charNum = 0;
                     setHLPx(true);
                     setupPromp();
