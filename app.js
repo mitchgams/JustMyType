@@ -75,7 +75,7 @@ $('document').ready(function() {
             $('<p>Character up: '+game.wordCharList[game.charNum]+'</p>').appendTo('#target-letter');
             $('#feedback').empty();
             $('<p>&#9989;</p>').appendTo('#feedback');
-            setHLPx(false);
+            setHighLightPx(false);
             if(String.fromCharCode(id) === " ") game.wordCount++;
             if(game.charNum === game.wordCharList.length) { // sentence complete & last word count++
                 game.wordCount++;
@@ -88,14 +88,14 @@ $('document').ready(function() {
                     game.wordCount = 0;
                     game.sentenceNum++;
                     game.charNum = 0;
-                    setHLPx(true);
+                    setHighLightPx(true);
                     setupPromp();
                 }
             }
         }
     }
 
-    function setHLPx(reset) {
+    function setHighLightPx(reset) {
         reset ? ($('#yellow-block').css('margin-left', '0px')) : ($('#yellow-block').css("margin-left", (17*game.charNum).toString()+"px"));
     }
 
