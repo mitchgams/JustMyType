@@ -15,7 +15,7 @@ let game ={
 $('document').ready(function() {
     
     // keyboard shift
-    $('#keyboard-upper-container').css('visibility', 'hidden');
+    $('#keyboard-upper-container').hide();
     $("body").on({
         keydown: function(e) {
           if (e.originalEvent.key === "Shift")
@@ -27,12 +27,12 @@ $('document').ready(function() {
         }
       })
     function upperCase() {
-            $('#keyboard-lower-container').css('visibility', 'hidden');
-            $('#keyboard-upper-container').css('visibility', 'visible');
+            $('#keyboard-lower-container').hide();
+            $('#keyboard-upper-container').show();
     }
     function lowerCase() {
-        $('#keyboard-lower-container').css('visibility', 'visible');
-        $('#keyboard-upper-container').css('visibility', 'hidden');
+        $('#keyboard-lower-container').show();
+        $('#keyboard-upper-container').hide();
       
     }
 
