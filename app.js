@@ -18,14 +18,23 @@ $('document').ready(function() {
     $('#keyboard-upper-container').hide();
     $("body").on({
         keydown: function(e) {
-          if (e.originalEvent.key === "Shift")
-            upperCase();
+            if (e.originalEvent.key === "Shift") {
+                upperCase();
+            }
         },
         keyup: function(e) {
-          if (e.originalEvent.key === "Shift")
-            lowerCase();
+            if (e.originalEvent.key === "Shift") {
+                lowerCase();
+            }
+            $('.key').css('background-color', '');
         }
-      })
+    });
+    // keyboard play
+    $('body').keypress((event) => {
+        console.log(event.keyCode);
+        $(`#${event.charCode}`).css('background-color', 'lightgray');
+        checkClick(event.charCode);
+    });
     function upperCase() {
             $('#keyboard-lower-container').hide();
             $('#keyboard-upper-container').show();
@@ -79,7 +88,6 @@ $('document').ready(function() {
                 $('#previous-wpm').empty();
                 $('<p>' + ((game.wordCount/game.finalTime)-(2*game.mistakes)).toFixed(2) + ' words per minute!</p>').appendTo('#previous-wpm');
                 if(game.sentenceNum < game.sentences.length) { // more sentences to go
-                    game.mistakes = 0;  
                     game.wordCount = 0;
                     game.sentenceNum++;
                     game.charNum = 0;
