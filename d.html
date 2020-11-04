@@ -1,0 +1,25 @@
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function addX(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+let addTo20 = addX(20);
+console.log(addTo20(50));
+
+function thisf(a, b, c) {
+  console.log(this.boo + a + b + c);
+}
+let poo = {
+  boo:"ss"
+}
+thisf.call(poo, "c", "d", "g");
+
+</script>
+
+</body>
+</html>
