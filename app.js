@@ -53,10 +53,8 @@ $('document').ready(function() {
         game.initialTime = nT.getTime();
         game.sentenceCharList = game.sentences[game.sentenceNum].split('');
         $('#feedback').empty();
-        $('#target-letter').empty();
-        $('#sentence').empty();
-        $('<p>'+game.sentences[game.sentenceNum]+'</p>').appendTo('#sentence');
-        $('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>').appendTo('#target-letter');
+        $('#target-letter').empty().append('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>');
+        $('#sentence').empty().append('<p>'+game.sentences[game.sentenceNum]+'</p>');
     }
     
     setupPromp();
@@ -65,16 +63,13 @@ $('document').ready(function() {
 
     function checkClick(id) {
         if(String.fromCharCode(id) !== game.sentenceCharList[game.charNum]) { // character wrong
-            $('#feedback').empty();
-            $('<p>&#10060;</p>').appendTo('#feedback');
+            $('#feedback').empty().append('<p>&#10060;</p>');
             game.mistakes++;
         } else { // character correct
 
             game.charNum++;
-            $('#target-letter').empty();
-            $('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>').appendTo('#target-letter');
-            $('#feedback').empty();
-            $('<p>&#9989;</p>').appendTo('#feedback');
+            $('#target-letter').empty().append('<p>Character up: '+game.sentenceCharList[game.charNum]+'</p>');
+            $('#feedback').empty().append('<p>&#9989;</p>');
             setHighLightPx(false);
             if(String.fromCharCode(id) === " ") game.wordCount++;
             if(game.charNum === game.sentenceCharList.length) { // sentence complete & last word count++
@@ -98,89 +93,4 @@ $('document').ready(function() {
     function setHighLightPx(reset) {
         reset ? ($('#yellow-block').css('margin-left', '0px')) : ($('#yellow-block').css("margin-left", (17*game.charNum).toString()+"px"));
     }
-
-    /**********************
-     * LOL was too tired to think clearly below apparently
-     * 
-     * 
-     */
-    /*function checkClick(id) {
-        try {
-            if(game.requireSpace && String.fromCharCode(id) !== " ") {
-                to
-            } 
-            if(String.fromCharCode(id) === game.wordCharList[game.wordCount][game.charNum] 
-            && game.wordCharList[game.wordCount].length >= game.charNum) {
-                game.charNum++;
-                // remove word from list once complete
-                // also increase word count
-                if(game.wordCharList[game.wordCount].length === game.charNum) { 
-                    game.wordList.shift();
-                    game.wordCount++;
-                    game.charNum = 0;
-                    game.requireSpace = true;
-                }
-                console.log("correct click and word still has a character to play");
-            }
-            if(game.wordCharList[game.wordCount].length === game.charNum
-                && game.wordList.length > 0) {
-                    if(String.fromCharCode(id) === " ") {
-
-                    }
-                    console.log("word is finnished and there are more words to go");
-                    console.log(game.wordCharList);
-            }
-            if(game.wordList.length === 0) {
-
-            }
-        } catch (e) {
-            console.log("sentence is finnished");
-            $('<p>complete</p>').appendTo('#previous-wpm');
-            game.charNum = 0;
-            game.wordCount = 0;
-            game.sentences.shift();
-            game.setWordList();
-            game.setWordCharList();
-            setupPromp();
-            console.log(game);
-        }
-    }*/
-
-    /*function setHLPx(reset) {
-        if(reset) {
-            $('#yellow-block').css('margin-left', '0px');
-        } else {
-            $('#yellow-block').css("margin-left", (17*game.charNum).toString()+"px");
-        }
-    }
-    setupPromp();
-    function checkClick(id) {
-        console.log(game);
-        $('#feedback').empty();
-        if(String.fromCharCode(id) === " ") game.wordCount++;
-        if(game.charList[0] !== String.fromCharCode(id)) { // wrong
-            $('<p>&#10060;</p>').appendTo('#feedback');
-            game.mistakes++; //add mistake
-        } else { // right
-            game.charNum++;
-            setHLPx(false); // false default
-            $('<p>&#9989;</p>').appendTo('#feedback');
-            game.charList.shift();
-            $('#target-letter').empty();
-            $('<p>Character up: '+game.charList[0]+'</p>').appendTo('#target-letter');
-            if(game.charList[0] === undefined) {
-                game.sentenceNum++;
-                setupPromp();
-                setHLPx(true);
-                game.charNum = 0;
-                game.wordCount++;
-            }
-        }
-    }
-    console.log(game.charList);
-*/
-    
-
-      
-
 });
